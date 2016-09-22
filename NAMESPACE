@@ -1,0 +1,15 @@
+useDynLib(dfphase1)
+
+importFrom(stats, p.adjust, quantile, reorder, rnorm, sd, uniroot)
+importFrom(lattice,xyplot,panel.xyplot,panel.text,panel.points,llines,trellis.par.get)
+importFrom(robustbase,covMcd)
+
+export(
+    phase1Plot, mphase1Plot,
+    shewhart, shewhart.normal.limits,
+    mshewhart, mshewhart.normal.limits,
+    changepoint, changepoint.normal.limits,
+    mchangepoint, mchangepoint.normal.limits,
+    rsp
+)
+importFrom(Rcpp, evalCpp)
