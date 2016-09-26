@@ -195,11 +195,11 @@ chart for subgrouped data from elliptical
 \examples{
 data(ryan)
 mshewhart(ryan)
-mshewhart(ryan[,,-10])
-mshewhart(ryan[,,-c(10,20)])
+mshewhart(ryan,subset=-10)
+mshewhart(ryan,subset=-c(10,20))
 mshewhart(ryan,score="Signed Ranks")
-mshewhart(ryan[,,-10],,score="Signed Ranks")
-mshewhart(ryan[,,-c(10,20)],,score="Signed Ranks")
+mshewhart(ryan,subset=-10,score="Signed Ranks")
+mshewhart(ryan,subset=-c(10,20),score="Signed Ranks")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

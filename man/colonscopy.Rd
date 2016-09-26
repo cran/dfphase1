@@ -17,6 +17,6 @@
 }
 \examples{
 data(colonscopy)
-mphase1Plot(colonscopy)
+phase1Plot(colonscopy)
 }
 \keyword{datasets}

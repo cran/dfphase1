@@ -92,7 +92,7 @@ namespace {
 	}
 	mq /= m;
 	sq = sqrt(sq/m)/c4;
-	s = sqrt(n)*(s-mq)/sq;
+	s = sqrt(static_cast<double>(n))*(s-mq)/sq;
     }
 
 }
@@ -100,7 +100,7 @@ namespace {
 // [[Rcpp::export]]
 List ggxbars(NumericMatrix x, bool aggr_with_mean, int L) {
     int i, n=x.nrow(), m = x.ncol();
-    double sn = sqrt(n);
+    double sn = sqrt(static_cast<double>(n));
     NumericVector xb(m), s(m), est(2), w(aggr_with_mean?0:m);
     NumericMatrix xx=clone(x), pstat(3,L);
     for (i=0; i<L; i++) {
@@ -120,7 +120,7 @@ List ggxbars(NumericMatrix x, bool aggr_with_mean, int L) {
 // [[Rcpp::export]]
 NumericMatrix ggxbarsall(int n, int m, bool aggr_with_mean, int rep) {
     int i;
-    double sn = sqrt(n);
+    double sn = sqrt(static_cast<double>(n));
     NumericVector xb(m), s(m), est(2), w(aggr_with_mean?0:m);
     NumericMatrix x(n,m), stat(3,rep);
     for (i=0; i<rep; i++) {

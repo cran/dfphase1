@@ -93,7 +93,7 @@ namespace {
 
     // update the mean and the cholesky factor of cov; length(w)=p
     inline void ggupdbr(int p, int n, double *xb, double *r, double *x, double *w) {
-	int i, ione=1;
+	int i;
 	double d, n1=n+1.0, sn=sqrt(n/n1);
 	for (i=0; i<p; i++) {
 	    d = x[i]-xb[i]; xb[i] += d/n1; w[i] = sn*d;
@@ -144,7 +144,7 @@ namespace {
 
     inline void ggrmeans(int p, int n, double *x, double *m) {
 	int i, ione=1;
-	double one=1, dn=1.0/n;
+	double dn=1.0/n;
 	std::fill(m,m+p,0.0);
 	for (i=0; i<n; i++, x+=p) F77_CALL(daxpy)(&p,&dn,x,&ione,m,&ione); 
     }
@@ -166,8 +166,8 @@ namespace {
 
     // s <- spatial sign of x-m
     double ggssign(int p, double *x, double *m, double *s) {
-	int i, one=1;
-	double d, onem=-1;
+	int i;
+	double d;
 	for (i=0, d=0.0; i<p; i++) {
 	    s[i] = x[i]-m[i]; d += s[i]*s[i];
 	}
@@ -189,7 +189,7 @@ namespace {
 
     double ggspatialsigns(int p, int n, double *x, double *s) {
 	int i, one=1;
-	double wsum=0, d=sqrt(p), eps=GGEPS2, g;
+	double wsum=0, d=sqrt(static_cast<double>(p)), eps=GGEPS2, g;
 	if (s!=x) std::copy(x,x+p*n,s);
 	for (i=0; i<n; i++, s+=p) {
 	    g =  F77_CALL(dnrm2)(&p,s,&one);
@@ -205,7 +205,7 @@ namespace {
 
     // length(iw)=n length(w)=2*n 
     double ggsignedranks(int p, int n, double *x, double *s, int *iw, double *w) {
-	int i, j, n1=n+1, pn=p*n, one=1;
+	int i, n1=n+1, pn=p*n, one=1;
 	double *si=s, *rk=w+n, eps=GGEPS2, wsum=0.0, gsum=0.0, g;
 	if (s!=x) std::copy(x,x+p*n,s);
 	ggnorm2(p,n,s,w);
@@ -226,7 +226,7 @@ namespace {
 
     // length(w)=p
     void ggspatialranks(int p, int n, double *x, double *s, double *w) {
-	int i, j, k, ione=1, pn=p*n;
+	int i, j, ione=1, pn=p*n;
 	double d, *xi, *xj, *si, *sj, eps=GGEPS, one=1.0, mone=-1.0;
 	std::fill(s,s+pn,0.0);
 	for (i=0, xi=x, si=s; i<n; i++, xi+=p, si+=p) {
@@ -239,8 +239,8 @@ namespace {
 	}
 	d = F77_CALL(dnrm2)(&pn,s,&ione);
 	if (d>GGEPS) {
-	     d = sqrt(pn) / d;
-	     F77_CALL(dscal)(&pn,&d,s,&ione);
+	    d = sqrt(static_cast<double>(pn)) / d;
+	    F77_CALL(dscal)(&pn,&d,s,&ione);
 	}
     }
 
@@ -274,7 +274,7 @@ namespace {
     
     // length(w)=2*p
     void ggclassic(int p, int n, int m, double *x, double *l, double *s, double *w) {
-	int i, j, r, one=1;
+	int i, j, one=1;
 	double *xb=w, *xi=w+p, *xx=x, a=1.0/m;
 	std::fill(l,l+p,0.0);
 	std::fill(s,s+p*p,0.0);
@@ -283,7 +283,7 @@ namespace {
 	    for (j=0; j<n; j++, xx+=p) ggupdbr(p,j,xb,s,xx,xi);
 	    F77_CALL(daxpy)(&p,&a,xb,&one,l,&one);
 	}
-	a = 1.0/sqrt(m*(n-1));
+	a = 1.0/sqrt(m*(n-1.0));
 	for (i=0; i<p; i++, s+=p) for (j=0; j<=i; j++) s[j] *= a;
     }
 
@@ -293,7 +293,7 @@ namespace {
 		 int *good, double *dist) {
 	int i, j, ng, target=std::min(4*p-1,n/2), ione=1, p2=p*p;
 	double lim, h=0.5*(n+p+1), cnp=1+(p+1.0)/(n-p)+2.0/(n-1-3*p), d, s,
-	    q = R::qchisq(0.5/n,p,0,0), *xi, eps=GGEPS;
+	    q = R::qchisq(0.5/n,p,0,0), *xi;
 	bool done;
 	// initialization (median and mad)
 	for (j=p; j<p; j++) {
@@ -327,7 +327,7 @@ namespace {
 	    std::fill(m,m+p,0.0); std::fill(r,r+p2,0.0);
 	    for (i=0, ng=0, xi=x; i<n; i++, xi+=p)
 		if (good[i]) {ggupdbr(p,ng,m,r,xi,w); ng++;}
-	    d = 1/sqrt(ng-1); F77_CALL(dscal)(&p2, &d, r, &ione);
+	    d = 1/sqrt(ng-1.0); F77_CALL(dscal)(&p2, &d, r, &ione);
 	    // recomputing the distance
 	    ggorth(p,n,m,r,x,w);
 	    ggnorm2(p,n,w,dist);
@@ -346,7 +346,7 @@ namespace {
 
     // length(w)=n
     void gggmedinit(int p, int n, double *x, double *m, double *w) {
-	int i, j, k, one=1, half=n/2;
+	int j, one=1, half=n/2;
 	for (j=0; j<p ; j++) {
 	    F77_CALL(dcopy)(&n, x+j, &p, w, &one); 
 	    std::nth_element(w, w+half, w+n);
@@ -386,7 +386,7 @@ namespace {
     // length(w) = p*p
     double gggtylerstep(int p, int n, double *s, double *r, double *w) {
 	int i, p2=p*p, p1=p+1, one=1;
-	double ans=1/sqrt(n), *cv=w+p2, *si;
+	double ans=1/sqrt(static_cast<double>(n)), *cv=w+p2, *si;
 	std::fill(w,w+p2,0.0);
 	for (i=0, si=s; i<n; i++, si+=p) gggivens(p,w,si);
 	F77_CALL(dscal)(&p2,&ans,w,&one);
@@ -400,7 +400,7 @@ namespace {
     // length(w) = p+2*n+pn+p*p length(iw)=n
     int gggtyler(int p, int n, std::string score, int iter, double *x,
 		 double *z, double *s, double *m, double *r, int *iw, double *w) {
-	int i=0, pn=p*n, ione=1;
+	int i=0;
 	double eps=sqrt(GGEPS), rnew=2*eps;
 	ggidmat(p,r);
 	while ((rnew>eps) && (i<iter)) {
@@ -413,8 +413,8 @@ namespace {
 
     int ggghr(int p, int n, std::string score, int iter, double *x,
 	      double *z, double *s, double *m, double *r, int *iw, double *w) {
-	int i=0, j;
-	double ws, t, eps=sqrt(GGEPS), mnew=2*eps, rnew=2*eps; 
+	int i=0;
+	double ws, eps=sqrt(GGEPS), mnew=2*eps, rnew=2*eps; 
 	gggmedinit(p,n,x,m,w);
 	ggidmat(p,r);
 	while (((mnew>eps) || (rnew>eps)) && (i<iter)) {
@@ -458,7 +458,7 @@ namespace {
 	int rk;
 	double ld;
 	gglogdet(p,r,rk,ld,w);
-	return n*(rk*(1+log(2*M_PI))+ld-rk*log(n));
+	return n*(rk*(1+log(2*M_PI))+ld-rk*log(static_cast<double>(n)));
     }
 
     double glrtboth(int p, int n1, int n2,
@@ -488,9 +488,9 @@ namespace {
     // length(wrk)=m*(p+p*p)+p*p+4*p
     void ggglrt(int p, int n, int m, bool onlymean,
 		double *x, double *glr, double *w) {
-	int i, j, l, nm=m*n, p2=p*p, pp2=p+p2, one=1;
+	int i, j, l, nm=m*n, p2=p*p, pp2=p+p2;
 	double *c=w, *r=c+p, *s=r+p2, *wrk=s+pp2*m,
-	    *xi=x+p*(m*n-1), *si=s+pp2*(m-1), *ri, d, l0;
+	    *xi=x+p*(m*n-1), *si=s+pp2*(m-1), l0;
 	double (*obj)(int,int,int,double *,double *,double *,double *,double, double *);
 	obj = onlymean ? glrtmean : glrtboth;
 	std::fill(c,c+pp2,0.0);
@@ -516,8 +516,8 @@ namespace {
 
     // length(w)=6*p+2p*p
     void ggt2var(int p, int n, double *x, double *stat, double *w) {
-	int i, j, rk;
-	double t, u, v, *xi, *m=w, *r=w+p, *wrk=r+p*p, sn=n-1.0, eps=GGEPS;
+	int i, rk;
+	double u, v, *xi, *m=w, *r=w+p, *wrk=r+p*p, sn=n-1.0;
 	std::fill(w,w+p+p*p,0.0);
 	for (i=0, xi=x; i<n; i++, xi+=p) ggupdbr(p,i,m,r,xi,wrk);
 	ggnorm2(p,1,m,stat);
@@ -653,8 +653,8 @@ List ggscore2mshewhart(NumericVector x, std::string stat, int L=1000) {
 // [[Rcpp::export]]
 List ggglrchart(NumericVector x, bool onlymean=false, int L=1000) {
     IntegerVector dim=x.attr("dim");
-    int i, j, k, p=dim[0], n=dim[1], m=dim(2), nm=n*m;
-    double l=1/L, *gg;
+    int i, p=dim[0], n=dim[1], m=dim(2), nm=n*m;
+    double *gg;
     NumericVector xx=clone(x), g(m), w((m+5)*(p+p*p));
     NumericMatrix gp(m,L);
     ggglrt(p,n,m,onlymean,x.begin(),g.begin(),w.begin());

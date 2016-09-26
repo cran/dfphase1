@@ -26,7 +26,7 @@ rsp <- function(y, plot=TRUE, nperm=1000, seed=11642257, alpha=0.05,
         a <- list(m$yi,s$yi)
         attr(a[[1]],"fit") <- m$fit
         attr(a[[2]],"fit") <- s$fit
-        pp <- function(p) if (p<0.001) "(p<0.001)" else paste("(p=",round(p,2),")",sep="")  
+        pp <- function(p) if (p<0.001) "(p<0.001)" else paste("(p=",round(p,3),")",sep="")  
         names(a) <- c(paste("Level",pp(p[1])),
                       paste("Scale",pp(p[2])))
         cc.plot(1:opt$m,"all","free","l",a)
