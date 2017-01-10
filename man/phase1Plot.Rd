@@ -22,8 +22,8 @@ mphase1Plot(x, layout = c(1, p))
     \code{mphase1Plot}: a pxnxm data numeric array
     or a pxm numeric matrix.
 
-    Here, \eqn{p} denotes the number of variables, \eqn{n} the size
-    of each subgroup and \eqn{n} the number of subgroups.
+    Here, p denotes the number of variables, n the size
+    of each subgroup and m the number of subgroups.
 }
   \item{layout}{
     an integer vector describing the multi-panel (and
@@ -31,7 +31,9 @@ mphase1Plot(x, layout = c(1, p))
 }
 }
 
-
+\author{
+\packageAuthor{dfphase1}.
+}
 \examples{
   x <- matrix(rt(5*20,5),5)
   x[,10] <- x[,10]+3

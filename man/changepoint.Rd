@@ -95,7 +95,7 @@ mchangepoint.normal.limits(p, n, m, score = c("Identity", "Signed Ranks", "Spati
   Note that 
   the control statistic is equivalent to that proposed by
   Lung-Yut-Fong \emph{et al.} (2011)
-  when \code{score="Marginal Ranks"} and \code{only.mean=TRUE}
+  when \code{score="Marginal Ranks"} and \code{only.mean=TRUE}.
 
   As suggested by Sullivan and Woodall (1999, 2000), 
   control limits proportional to the
@@ -114,7 +114,7 @@ mchangepoint.normal.limits(p, n, m, score = c("Identity", "Signed Ranks", "Spati
   \code{changepoint} and \code{mchangepoint} return an
   invisible list with elements
   \item{\code{glr} }{
-    control statistics
+    control statistics.
   }
   \item{\code{mean}, \code{dispersion} }{decomposition
   of the control statistics in the two parts due to changes in the mean and
@@ -148,18 +148,21 @@ mchangepoint.normal.limits(p, n, m, score = c("Identity", "Signed Ranks", "Spati
     of all multivariate elliptical distributions.
   }
 }
+\author{
+\packageAuthor{dfphase1}.
+}
 \references{
   A. Lung-Yut-Fong, C. Lévy-Leduc, O. Cappé O (2011) \dQuote{Homogeneity and change-point detection tests
-    for multivariate data using rank statistics}. arXiv preprint arXiv:11071971
+    for multivariate data using rank statistics}. arXiv preprint arXiv:11071971.
   
   P. Qiu (2013) \emph{Introduction to Statistical Process Control}. Chapman & Hall/CRC Press.
   
   J. H. Sullivan, W. H. Woodall (1996) \dQuote{A control chart for preliminary analysis of individual observa-
-  tions}. \emph{Journal of Quality Technology}, \bold{28}, pp. 265--278
+  tions}. \emph{Journal of Quality Technology}, \bold{28}, pp. 265--278.
   
   J. H. Sullivan, W. H. Woodall (2000) \dQuote{Change-point detection of mean vector or covariance matrix
   shifts using multivariate individual observations}. \emph{IIE Transactions}
-  \bold{32}, pp. 537--549
+  \bold{32}, pp. 537--549.
 
 }
 \examples{
@@ -169,6 +172,7 @@ mchangepoint(gravel)
 mchangepoint(gravel,score="Signed Ranks")
 }
 \keyword{htest}
+\keyword{multivariate}
 \keyword{statistical process monitoring}
 \keyword{statistical process control}
-\keyword{change points detection}
+\keyword{distribution-free methods}

@@ -9,7 +9,7 @@
 \code{rsp} implements the Phase I method described in Capizzi and Masarotto (2013).
 }
 \usage{
-rsp(y, plot = TRUE, nperm = 1000, seed = 11642257, alpha = 0.05,
+rsp(y, plot = TRUE, L = 1000, seed = 11642257, alpha = 0.05,
     maxsteps = min(50, round(NROW(y)/15)), lmin = max(5, min(10, round(NROW(y)/10))))
 }
 %- maybe also 'usage' for other objects documented here.
@@ -22,7 +22,7 @@ individual observations or (ii) a nxm matrix for subgrouped data
   \item{plot}{
     logical; if \code{TRUE}, the diagnostic plot is displayed. 
 }
-  \item{nperm}{
+  \item{L}{
     integer; the number of random permutations used to compute the p-values.
 }
   \item{seed}{
@@ -48,6 +48,9 @@ individual observations or (ii) a nxm matrix for subgrouped data
   \item{stat}{the summary statistics (a mx2 matrix)}
   \item{fitted}{the (possibly time-variant) estimates of the process level and
   scale (a mx2 matrix).}
+}
+\author{
+\packageAuthor{dfphase1}.
 }
 \references{
   G. Capizzi, G. Masarotto (2013),
@@ -76,4 +79,4 @@ rsp(colonscopy)
 \keyword{htest}
 \keyword{statistical process monitoring}
 \keyword{statistical process control}
-\keyword{change points detection}
+\keyword{distribution-free methods}

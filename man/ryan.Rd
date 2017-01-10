@@ -9,11 +9,11 @@
 }
 \usage{data(ryan)}
 \format{
-  A 2x4x20 array
+  A 2x4x20 array.
 }
 \references{
   T. P. Ryan (2011), \emph{Statistical Methods for Quality Improvement},
-  3rd ed., Wiley,
+  3rd ed., Wiley.
 }
 \examples{
 data(ryan)

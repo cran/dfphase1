@@ -1,4 +1,4 @@
-rsp <- function(y, plot=TRUE, nperm=1000, seed=11642257, alpha=0.05,
+rsp <- function(y, plot=TRUE, L=1000, seed=11642257, alpha=0.05,
                 maxsteps=min(50,round(NROW(y)/15)),
                 lmin=max(5,min(10,round(NROW(y)/10)))) {
     d <- dim(y)
@@ -9,7 +9,7 @@ rsp <- function(y, plot=TRUE, nperm=1000, seed=11642257, alpha=0.05,
         y <- t(y)        
     }
     opt <- list(m=NROW(y),n=NCOL(y),
-                nperm=nperm,seed=seed,maxsteps=maxsteps,lmin=lmin,alpha=alpha)
+                L=L,seed=seed,maxsteps=maxsteps,lmin=lmin,alpha=alpha)
     if (!is.na(opt$seed)) {
         if (exists(".Random.seed", envir = .GlobalEnv, inherits = FALSE)) {
             kept <- get(".Random.seed", envir = .GlobalEnv, inherits = FALSE)
@@ -38,17 +38,17 @@ rsp <- function(y, plot=TRUE, nperm=1000, seed=11642257, alpha=0.05,
 
 .rsp <- function(y, type, opt) {
     nsteps <- opt$maxsteps
-    ipar <- c(opt$m,opt$n,nsteps,opt$lmin,if (type=="level") 1 else 2,opt$nperm)
+    ipar <- c(opt$m,opt$n,nsteps,opt$lmin,if (type=="level") 1 else 2,opt$L)
     nstat <- if (opt$n==1) nsteps else nsteps+1
     mod <- .C("ggdotrsp",as.integer(ipar),as.double(y),
               steps=integer(1+2*(nsteps+1)),stat=double(nstat),
-              perm=double(nstat*opt$nperm),PACKAGE="dfphase1")
+              perm=double(nstat*opt$L),PACKAGE="dfphase1")
     perm <- matrix(mod$perm,nstat)
     a <- apply(perm,1,mean)
     b <- pmax(apply(perm,1,sd),.Machine$double.eps)
     r <- (cbind(mod$stat,perm)-a)/b
     w <- apply(r,2,max)
-    p <- (sum(w>=w[1])-1)/opt$nperm
+    p <- (sum(w>=w[1])-1)/opt$L
     yi <- if (type=="level") rowMeans(y) else sqrt(rowMeans(y*y))
     if (p>opt$alpha) {
         fit <- rep(mean(yi),length(yi))

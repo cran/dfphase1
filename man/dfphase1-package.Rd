@@ -31,9 +31,10 @@
     preliminary rank transformation can be used to improve the performance in the case of
     nonnormal data.
     \item
-    \code{\link{rsp}}: the univariate method introduced by
-    Capizzi and Masarotto (2013) to detect multiple location and
-    scale shifts in individual or subgrouped data.
+    \code{\link{rsp}} and \code{\link{mphase1}}: the univariate and
+    multivariate methods introduced by
+    Capizzi and Masarotto (2013) and (2016) to detect multiple isolated
+    or step shifts in individual or subgrouped data.
   }
   The use of distribution-free control limits is emphasized.
   However, the package also includes some functions 
@@ -63,22 +64,27 @@
   be used for plotting the data.
 }
 \author{
-\packageAuthor{dfphase1} (maintainer: \packageMaintainer{dfphase1})
+\packageAuthor{dfphase1} (maintainer: \packageMaintainer{dfphase1}).
 }
 \references{
-    G. Capizzi (2015) \dQuote{Recent advances in process monitoring: Nonparametric and variable-selection
-      methods for Phase I and Phase II (with discussion)}. \emph{Quality
-      Engineering},  \bold{27}, pp. 44--80
+  G. Capizzi (2015) \dQuote{Recent advances in process monitoring: Nonparametric and variable-selection
+    methods for Phase I and Phase II (with discussion)}. \emph{Quality
+    Engineering},  \bold{27}, pp. 44--80.
   
-  G. Capizzi, G. Masarotto (2013),
+  G. Capizzi and G. Masarotto (2013),
   \dQuote{Phase I Distribution-Free Analysis of Univariate Data}.
   \emph{Journal of Quality Technology}, \bold{45}, pp. 273-284.
   
-  Capizzi, G. and Masarotto, G. (2016),
+  G. Capizzi and G. Masarotto (2016),
   \dQuote{Phase I Distribution-Free Analysis with the R
-    Package \code{dfphase1}}. Forthcoming on
+    Package \code{dfphase1}}. To appear on
   \emph{Frontiers in Statistical Quality Control 12}, eds. S. Knoth and
   W. Schmid, Springer.
+
+  G. Capizzi and G. Masarotto (2016), Phase I Distribution-Free
+  Analysis of Multivariate Data, \emph{Technometrics},
+  to appear, \url{http://dx.doi.org/10.1080/00401706.2016.1272494}.
+  
 }
 \seealso{
   \code{\link{shewhart}},

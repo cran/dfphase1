@@ -163,18 +163,20 @@ mshewhart.normal.limits(p, n, m, stat = c("T2Var", "T2", "Var", "Depth Ranks"),
     of all multivariate elliptical distributions.
   }
 }
-
+\author{
+\packageAuthor{dfphase1}.
+}
 
 \references{
   R. C. Bell, L. A. Jones-Farmer, N. Billor (2014) \dQuote{A distribution-free multivariate Phase I location control
 chart for subgrouped data from elliptical
-  distributions}. \emph{Technometrics}, \bold{56}, pp. 528--538
+  distributions}. \emph{Technometrics}, \bold{56}, pp. 528--538.
 
   
   C. R. Cheng, J. J. H. Shiau JJH (2015)
   \dQuote{A distribution-free multivariate control chart for Phase I applications}.
     \emph{Quality and Reliability Engineering International}, \bold{31},
-    pp. 97--111
+    pp. 97--111.
 
   M. Hallin and D. Paindaveine (2005) \dQuote{Affine-Invariant Aligned
   Rank Tests for the Multivariate General Linear Model with VARMA
@@ -204,5 +206,7 @@ mshewhart(ryan,subset=-c(10,20),score="Signed Ranks")
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{htest}
+\keyword{multivariate}
 \keyword{statistical process monitoring}
 \keyword{statistical process control}
+\keyword{distribution-free methods}

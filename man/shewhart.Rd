@@ -152,6 +152,10 @@ shewhart.normal.limits(n, m, stat = c("XbarS", "Xbar", "S", "Rank", "lRank", "sR
     }
 }
 
+\author{
+\packageAuthor{dfphase1}.
+}
+
 \references{
     L. A. Jones-Farmer, V. Jordan, C. W. Champs (2009)
     \dQuote{Distribution-free Phase I control charts for subgroup location},
@@ -183,3 +187,4 @@ shewhart(colonscopy,stat="sRank",FAP=0.1,L=10000)
 \keyword{htest}
 \keyword{statistical process monitoring}
 \keyword{statistical process control}
+\keyword{distribution-free methods}

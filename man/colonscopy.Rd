@@ -8,7 +8,7 @@
 }
 \usage{data(colonscopy)}
 \format{
-  A 5x30 matrix
+  A 5x30 matrix.
 }
 \references{
     L. A. Jones-Farmer, V. Jordan, C. W. Champs (2009)
