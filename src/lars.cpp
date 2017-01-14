@@ -44,7 +44,7 @@ namespace {
 LogicalVector alasso(NumericMatrix x, NumericVector y, double gamma, double P) {
     bool go=TRUE;
     int i, n=x.nrow(), p=x.ncol(), n2=n/2, nb, nbopt=0, ione=1;
-    double bi, crit, critopt, k=log(n);//+2*gamma*log(P);
+    double bi, crit, critopt, k=log(static_cast<double>(n));
     IntegerVector ifor(ILENGTH(p));
     NumericVector b(p), bopt(p), r(n), dfor(DLENGTH(p));
     gglarsinit(x.nrow(),p,x.begin(),y.begin(),larsnoscale,NULL,forward,forward,
@@ -61,13 +61,13 @@ LogicalVector alasso(NumericMatrix x, NumericVector y, double gamma, double P) {
 	    if (fabs(b[i])>EPS2) {
 		bi = -b[i];
 		F77_CALL(daxpy)(&n,&bi,x.begin()+n*i,&ione,r.begin(),&ione);
-		crit = n*log(mean(r*r))+k*nb+2*gamma*R::lchoose(P,nb);
-		if ((nbopt==0)||(crit<critopt)) {
-		    critopt = crit;
-		    nbopt = nb;
-		    std::copy(b.begin(),b.end(),bopt.begin());
-		}
 	    }
+	}
+	crit = n*log(mean(r*r))+k*nb+2*gamma*R::lchoose(P,nb);
+	if ((nbopt==0)||(crit<critopt)) {
+	    critopt = crit;
+	    nbopt = nb;
+	    std::copy(b.begin(),b.end(),bopt.begin());
 	}
     } while(go);
     return abs(bopt)>EPS;

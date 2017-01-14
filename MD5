@@ -1,6 +1,6 @@
-3eb7905ff2a63cf0fe716a7cca8a9058 *DESCRIPTION
+7ebd47414c2147587a3c8c600573bbc0 *DESCRIPTION
 cc133e626a64ad6cc4a3842f114f3b5e *NAMESPACE
-cdc98dd82e5f2beb8c2f451ac58c8fd6 *NEWS
+d9185b4ebab9b19279f18fd8678c6965 *NEWS
 0e8823d82f645b96ad4e4eba75e8f39c *R/RcppExports.R
 8923d85ccde166de04afc3af90bb4472 *R/glr.R
 23c765250581b15aaad862195e930e3a *R/mphase1.R
@@ -9,7 +9,7 @@ cdc98dd82e5f2beb8c2f451ac58c8fd6 *NEWS
 f18ae2affd554e26936771febebf1040 *R/rsp.R
 1479bb637e5b79807e1c6ba1bf5d25c0 *R/shewhart.R
 2d51c251b84eb1674de9fcf5330f814e *R/util.R
-76ff33a01e06201753a84f9c06af9955 *build/partial.rdb
+ddcd4a8c21e5a633a4462c3dcfcdb387 *build/partial.rdb
 3d664002dbb31a801404837bae987f0d *data/Student.RData
 18c7aa2271c9df48955312219ef2d8a7 *data/colonscopy.RData
 c3a2053111f331477bbd418bc926ecb0 *data/fe.RData
@@ -30,7 +30,7 @@ df874445c580c7a859b79db154497769 *man/ryan.Rd
 585e649beba91dd95642048726034f95 *man/shewhart.Rd
 2a6f9e9e044a78154d3cfda5936d6f48 *src/Makevars
 636af4433fd001c773a17144ee1ae05b *src/RcppExports.cpp
-0f33e6b7df49a3bcd954f44fceadd4cf *src/lars.cpp
+f7c8182218f67566e24ecae53585ac5b *src/lars.cpp
 8c5a3c8716cf6ecd46cbde3e0f9526d7 *src/mphase1.cpp
 575c0be9dd34781aed217ca5394ef112 *src/multi.cpp
 c3bd38a05c45e58d812071bc25b035dc *src/rsp.c
