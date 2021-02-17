@@ -152,17 +152,22 @@ mchangepoint.normal.limits(p, n, m, score = c("Identity", "Signed Ranks", "Spati
 \packageAuthor{dfphase1}.
 }
 \references{
-  A. Lung-Yut-Fong, C. Lévy-Leduc, O. Cappé O (2011) \dQuote{Homogeneity and change-point detection tests
-    for multivariate data using rank statistics}. arXiv preprint arXiv:11071971.
+  A. Lung-Yut-Fong, C. Lévy-Leduc, O. Cappé O (2011) 
+  \dQuote{Homogeneity and change-point detection tests
+for multivariate data using rank statistics}. arXiv:11071971,
+\url{https://arxiv.org/abs/1107.1971}.
+
   
   P. Qiu (2013) \emph{Introduction to Statistical Process Control}. Chapman & Hall/CRC Press.
   
-  J. H. Sullivan, W. H. Woodall (1996) \dQuote{A control chart for preliminary analysis of individual observa-
-  tions}. \emph{Journal of Quality Technology}, \bold{28}, pp. 265--278.
+  J. H. Sullivan, W. H. Woodall (1996) \dQuote{A control chart for
+  preliminary analysis of individual observations}. \emph{Journal of
+  Quality Technology}, \bold{28}, pp. 265--278, 
+  \doi{10.1080/00224065.1996.11979677}.    
   
-  J. H. Sullivan, W. H. Woodall (2000) \dQuote{Change-point detection of mean vector or covariance matrix
-  shifts using multivariate individual observations}. \emph{IIE Transactions}
-  \bold{32}, pp. 537--549.
+  J. H. Sullivan, W. H. Woodall (2000) \dQuote{Change-point detection of mean vector or covariance matrix shifts using multivariate individual observations}. 
+  \emph{IIE Transactions}, \bold{32}, pp. 537--549
+  \doi{10.1080/07408170008963929}.
 
 }
 \examples{

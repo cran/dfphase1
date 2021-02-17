@@ -2,6 +2,20 @@
 using namespace Rcpp;
 
 namespace {
+
+    void ggperm(int n, double *y) {
+        int i;
+        double yi;
+        while (n > 1) {
+            i = floor(n * unif_rand());
+            n -= 1;
+            yi = y[i];
+            y[i] = y[n];
+            y[n] = yi;
+        }
+    }
+    
+
     inline double ggmedian(int n, double *x, double *w) {
 	int half = n/2;
 	std::copy(x, x+n, w);
@@ -31,7 +45,6 @@ namespace {
 	}   
     }
 
-    int isample(const int n) {return floor(n*unif_rand());}
 
     inline void ggcolmeans(NumericMatrix x, NumericVector xbar) {
 	int n=x.nrow(), m=x.ncol(), i, j;
@@ -99,12 +112,12 @@ namespace {
 
 // [[Rcpp::export]]
 List ggxbars(NumericMatrix x, bool aggr_with_mean, int L) {
-    int i, n=x.nrow(), m = x.ncol();
+    int i, n=x.nrow(), m = x.ncol(), nm = n*m;
     double sn = sqrt(static_cast<double>(n));
     NumericVector xb(m), s(m), est(2), w(aggr_with_mean?0:m);
     NumericMatrix xx=clone(x), pstat(3,L);
     for (i=0; i<L; i++) {
-	std::random_shuffle(xx.begin(),xx.end(),isample);
+        ggperm(nm, xx.begin());
 	horsexbars(xx, aggr_with_mean, xb, s, est, w);
 	xb = abs(xb-est[0]);
 	pstat(0,i) = sn*(*std::max_element(xb.begin(),xb.end()))/est[1];

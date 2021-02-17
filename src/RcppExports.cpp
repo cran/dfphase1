@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // alasso
 LogicalVector alasso(NumericMatrix x, NumericVector y, double gamma, double P);
-RcppExport SEXP dfphase1_alasso(SEXP xSEXP, SEXP ySEXP, SEXP gammaSEXP, SEXP PSEXP) {
+RcppExport SEXP _dfphase1_alasso(SEXP xSEXP, SEXP ySEXP, SEXP gammaSEXP, SEXP PSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -21,7 +21,7 @@ END_RCPP
 }
 // MPHASE1
 List MPHASE1(NumericVector xx, bool isolated, bool step, int ncp, int lmin, int nperm);
-RcppExport SEXP dfphase1_MPHASE1(SEXP xxSEXP, SEXP isolatedSEXP, SEXP stepSEXP, SEXP ncpSEXP, SEXP lminSEXP, SEXP npermSEXP) {
+RcppExport SEXP _dfphase1_MPHASE1(SEXP xxSEXP, SEXP isolatedSEXP, SEXP stepSEXP, SEXP ncpSEXP, SEXP lminSEXP, SEXP npermSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -37,7 +37,7 @@ END_RCPP
 }
 // ggrscore
 List ggrscore(NumericVector x, std::string score, int iter);
-RcppExport SEXP dfphase1_ggrscore(SEXP xSEXP, SEXP scoreSEXP, SEXP iterSEXP) {
+RcppExport SEXP _dfphase1_ggrscore(SEXP xSEXP, SEXP scoreSEXP, SEXP iterSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -50,7 +50,7 @@ END_RCPP
 }
 // ggdepthranks
 List ggdepthranks(NumericVector x, int L);
-RcppExport SEXP dfphase1_ggdepthranks(SEXP xSEXP, SEXP LSEXP) {
+RcppExport SEXP _dfphase1_ggdepthranks(SEXP xSEXP, SEXP LSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -62,7 +62,7 @@ END_RCPP
 }
 // ggclassicmshewhart
 List ggclassicmshewhart(NumericVector x, std::string stat, int L);
-RcppExport SEXP dfphase1_ggclassicmshewhart(SEXP xSEXP, SEXP statSEXP, SEXP LSEXP) {
+RcppExport SEXP _dfphase1_ggclassicmshewhart(SEXP xSEXP, SEXP statSEXP, SEXP LSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -75,7 +75,7 @@ END_RCPP
 }
 // ggscore2mshewhart
 List ggscore2mshewhart(NumericVector x, std::string stat, int L);
-RcppExport SEXP dfphase1_ggscore2mshewhart(SEXP xSEXP, SEXP statSEXP, SEXP LSEXP) {
+RcppExport SEXP _dfphase1_ggscore2mshewhart(SEXP xSEXP, SEXP statSEXP, SEXP LSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -88,7 +88,7 @@ END_RCPP
 }
 // ggglrchart
 List ggglrchart(NumericVector x, bool onlymean, int L);
-RcppExport SEXP dfphase1_ggglrchart(SEXP xSEXP, SEXP onlymeanSEXP, SEXP LSEXP) {
+RcppExport SEXP _dfphase1_ggglrchart(SEXP xSEXP, SEXP onlymeanSEXP, SEXP LSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -99,9 +99,34 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// ggdotrsp
+List ggdotrsp(IntegerVector ripar, NumericVector ry);
+RcppExport SEXP _dfphase1_ggdotrsp(SEXP riparSEXP, SEXP rySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type ripar(riparSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type ry(rySEXP);
+    rcpp_result_gen = Rcpp::wrap(ggdotrsp(ripar, ry));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ggstepfactor
+IntegerVector ggstepfactor(int m, int level, IntegerVector rsteps);
+RcppExport SEXP _dfphase1_ggstepfactor(SEXP mSEXP, SEXP levelSEXP, SEXP rstepsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type m(mSEXP);
+    Rcpp::traits::input_parameter< int >::type level(levelSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type rsteps(rstepsSEXP);
+    rcpp_result_gen = Rcpp::wrap(ggstepfactor(m, level, rsteps));
+    return rcpp_result_gen;
+END_RCPP
+}
 // ggxbars
 List ggxbars(NumericMatrix x, bool aggr_with_mean, int L);
-RcppExport SEXP dfphase1_ggxbars(SEXP xSEXP, SEXP aggr_with_meanSEXP, SEXP LSEXP) {
+RcppExport SEXP _dfphase1_ggxbars(SEXP xSEXP, SEXP aggr_with_meanSEXP, SEXP LSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -114,7 +139,7 @@ END_RCPP
 }
 // ggxbarsall
 NumericMatrix ggxbarsall(int n, int m, bool aggr_with_mean, int rep);
-RcppExport SEXP dfphase1_ggxbarsall(SEXP nSEXP, SEXP mSEXP, SEXP aggr_with_meanSEXP, SEXP repSEXP) {
+RcppExport SEXP _dfphase1_ggxbarsall(SEXP nSEXP, SEXP mSEXP, SEXP aggr_with_meanSEXP, SEXP repSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -128,7 +153,7 @@ END_RCPP
 }
 // ggrank
 List ggrank(NumericMatrix x);
-RcppExport SEXP dfphase1_ggrank(SEXP xSEXP) {
+RcppExport SEXP _dfphase1_ggrank(SEXP xSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -139,7 +164,7 @@ END_RCPP
 }
 // ggrankall
 NumericMatrix ggrankall(int n, int m, int rep);
-RcppExport SEXP dfphase1_ggrankall(SEXP nSEXP, SEXP mSEXP, SEXP repSEXP) {
+RcppExport SEXP _dfphase1_ggrankall(SEXP nSEXP, SEXP mSEXP, SEXP repSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -149,4 +174,26 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(ggrankall(n, m, rep));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_dfphase1_alasso", (DL_FUNC) &_dfphase1_alasso, 4},
+    {"_dfphase1_MPHASE1", (DL_FUNC) &_dfphase1_MPHASE1, 6},
+    {"_dfphase1_ggrscore", (DL_FUNC) &_dfphase1_ggrscore, 3},
+    {"_dfphase1_ggdepthranks", (DL_FUNC) &_dfphase1_ggdepthranks, 2},
+    {"_dfphase1_ggclassicmshewhart", (DL_FUNC) &_dfphase1_ggclassicmshewhart, 3},
+    {"_dfphase1_ggscore2mshewhart", (DL_FUNC) &_dfphase1_ggscore2mshewhart, 3},
+    {"_dfphase1_ggglrchart", (DL_FUNC) &_dfphase1_ggglrchart, 3},
+    {"_dfphase1_ggdotrsp", (DL_FUNC) &_dfphase1_ggdotrsp, 2},
+    {"_dfphase1_ggstepfactor", (DL_FUNC) &_dfphase1_ggstepfactor, 3},
+    {"_dfphase1_ggxbars", (DL_FUNC) &_dfphase1_ggxbars, 3},
+    {"_dfphase1_ggxbarsall", (DL_FUNC) &_dfphase1_ggxbarsall, 4},
+    {"_dfphase1_ggrank", (DL_FUNC) &_dfphase1_ggrank, 1},
+    {"_dfphase1_ggrankall", (DL_FUNC) &_dfphase1_ggrankall, 3},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_dfphase1(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }

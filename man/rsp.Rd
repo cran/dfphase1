@@ -55,7 +55,8 @@ individual observations or (ii) a nxm matrix for subgrouped data
 \references{
   G. Capizzi, G. Masarotto (2013),
   \dQuote{Phase I Distribution-Free Analysis of Univariate Data}.
-  \emph{Journal of Quality Technology}, \bold{45}, pp. 273-284.
+  \emph{Journal of Quality Technology}, \bold{45}, pp. 273-284,
+  \doi{10.1080/00224065.2013.11917938}.
 }
 
 

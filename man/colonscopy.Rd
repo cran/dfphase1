@@ -13,7 +13,8 @@
 \references{
     L. A. Jones-Farmer, V. Jordan, C. W. Champs (2009)
     \dQuote{Distribution-free Phase I control charts for subgroup location},
-    \emph{Journal of Quality Technology}, \bold{41}, pp. 304--316.
+    \emph{Journal of Quality Technology}, \bold{41}, pp. 304--316,
+    \doi{10.1080/00224065.2009.11917784}.
 }
 \examples{
 data(colonscopy)

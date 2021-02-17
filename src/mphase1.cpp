@@ -40,7 +40,7 @@ namespace {
     inline double stepobj(int p, int n1, int n2, double *sf, double *si, double *sl);    
     inline double maxstand(int ncp, double *stat, double *a, double *b);
     inline void scan(int p, int n, int first, int last, bool isolated, bool step, int lmin,
-		     double *s, int &best, double &gain, int *cp);
+		     double *s, int &best, double &gain, int &type, int *cp);
     // length(iwork)=2+4*ncp+nm
     // length(work)=p*(m+1)+std::max(m,p)+2*nm
     inline void ggforward(int p, int n, int m, double *x, bool isolated, bool step, int lmin, int ncp,
@@ -200,7 +200,7 @@ namespace {
 
     // length(t)=n
     void ggmmedinit(int p, int n, double *x, double *m, double *t) {
-	int i, j, k, half=n/2;
+	int j, half=n/2;
 	for (j=0; j<p ; j++) {
 	    F77_CALL(dcopy)(&n, x+j, &p, t, &ione);
 	    std::nth_element(t, t+half, t+n);
@@ -336,7 +336,7 @@ namespace {
     inline void ggforward(int p, int n, int m, double *x, bool isolated, bool step, int lmin, int ncp,
 			  double *l, double *r, double *sc, int *cp, double *stat,
 			  int *iwork, double *work) {
-	int i, j, nm=n*m, pnm=p*nm, nc1=ncp+1, iopt, ntau, *bcp,
+	int i, nm=n*m, nc1=ncp+1, iopt, ntau, *bcp,
 	    *tau = iwork, *split = tau+nc1, *type=split+nc1, *icp=type+nc1;
 	double *sb, *s, *si, *sii, *gi, st;
 	if (n==1) {

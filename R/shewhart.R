@@ -13,7 +13,7 @@ shewhart <- function(x, subset, stat=c("XbarS","Xbar","S","Rank","lRank","sRank"
     if ((NCOL(x)<2) || (NROW(x)<2))
         stop("n and m must be greater than 1 (after subsetting)")
     stat <- match.arg(stat)
-    if (is.na(limits)) {
+    if ((length(limits)==1) && is.na(limits)) {
         if (L<100) stop("L is too low") 
         if (!is.na(seed)) {
             if (exists(".Random.seed", envir = .GlobalEnv, inherits = FALSE)) {
@@ -33,13 +33,13 @@ shewhart <- function(x, subset, stat=c("XbarS","Xbar","S","Rank","lRank","sRank"
         u <- ggxbars(x,aggregation=="mean",L)
         if (stat=="Xbar") u$S <- NULL
         if (stat=="S") u$Xbar <- NULL
-        if (is.na(limits)) limits <- .shewhart.limits(u$perm,stat,FAP)
+        if ((length(limits)==1) && is.na(limits)) limits <- .shewhart.limits(u$perm,stat,FAP)
         u$perm <- NULL
     } else {
         u <- ggrank(x)
         if (stat=="lRank") u$sRank <- NULL
         if (stat=="sRank") u$lRank <- NULL
-        if (is.na(limits))
+        if ((length(limits)==1) && is.na(limits))
             limits <- shewhart.normal.limits(NROW(x),NCOL(x),stat,FAP=FAP,seed=seed,L=L)
     }
     u$limits <- limits

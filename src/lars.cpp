@@ -224,7 +224,7 @@ namespace {
 
 
     void gglarsdrop(int *ilars, double *dlars) {
-	int i, p=ilars[p_]; 
+	int p=ilars[p_]; 
 	double *b=dlars, *cov=b+p, *d=cov+p, *r=d+p , *u=r+p*p;
 	ilars[ign_] = 0 ;
 	ilars[act_] -= 1 ;
@@ -234,7 +234,7 @@ namespace {
 
     void gglarsadd(int *ilars, double *dlars) {
 	bool add=false;
-	int i, p=ilars[p_] , act=ilars[act_], ign=ilars[ign_], id, ncov, ione=1;
+	int i, p=ilars[p_] , act=ilars[act_], ign=ilars[ign_], id;
 	double cmax, *b=dlars, *cov=b+p, *d=cov+p, *r=d+p;
 	while (!add && (act+ign<p) ) {
 	    ggidamax(p-act-ign,cov+act+ign,&id,&cmax);
@@ -256,10 +256,10 @@ namespace {
 
 
     void gglarsdir(int *ilars, double *dlars) {
-	int i, p=ilars[p_], act=ilars[act_], nact=p-act, ione=1;
+	int p=ilars[p_], act=ilars[act_], nact=p-act, ione=1;
 	char no='N', tran='T', up='U';
 	double *b=dlars, *cov=b+p, *d=cov+p, *r=d+p, *u=r+p*p, *a=u+p,
-	    cmax, z=0.0, o=1.0, *r12=r+act*p, *a2=a+act ;
+	    z=0.0, o=1.0, *r12=r+act*p, *a2=a+act ;
 	F77_CALL(dcopy)(&act,cov,&ione,u,&ione);
 	F77_CALL(dcopy)(&act,cov,&ione,a,&ione);
 	F77_CALL(dtrsv)(&up, &tran, &no, &act, r, &p, u, &ione) ;

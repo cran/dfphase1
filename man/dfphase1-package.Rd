@@ -6,7 +6,14 @@
   \packageTitle{dfphase1}
 }
 \description{
-  \packageDescription{dfphase1}
+Statistical methods for retrospectively detecting changes in location
+and/or dispersion of univariate and multivariate variables. Data values
+are assumed to be independent, can be individual (one observation at
+each instant of time) or subgrouped (more than one observation at each
+instant of time).  Control limits are computed, often using a
+permutation approach, so that a prescribed false alarm probability is
+guaranteed  without making any parametric assumptions on the stable
+(in-control) distribution. 
 }
 \details{
   The main functions are:
@@ -33,7 +40,7 @@
     \item
     \code{\link{rsp}} and \code{\link{mphase1}}: the univariate and
     multivariate methods introduced by
-    Capizzi and Masarotto (2013) and (2016) to detect multiple isolated
+    Capizzi and Masarotto (2013) and (2017) to detect multiple isolated
     or step shifts in individual or subgrouped data.
   }
   The use of distribution-free control limits is emphasized.
@@ -66,25 +73,30 @@
 \author{
 \packageAuthor{dfphase1} (maintainer: \packageMaintainer{dfphase1}).
 }
+
 \references{
-  G. Capizzi (2015) \dQuote{Recent advances in process monitoring: Nonparametric and variable-selection
-    methods for Phase I and Phase II (with discussion)}. \emph{Quality
-    Engineering},  \bold{27}, pp. 44--80.
+  G. Capizzi (2015) \dQuote{Recent advances in process monitoring: 
+  Nonparametric and variable-selection
+  methods for Phase I and Phase II (with discussion)}. 
+  \emph{Quality Engineering},  \bold{27}, pp. 44--80,
+  \doi{10.1080/08982112.2015.968046}. 
   
   G. Capizzi and G. Masarotto (2013),
   \dQuote{Phase I Distribution-Free Analysis of Univariate Data}.
-  \emph{Journal of Quality Technology}, \bold{45}, pp. 273-284.
-  
-  G. Capizzi and G. Masarotto (2016),
-  \dQuote{Phase I Distribution-Free Analysis with the R
-    Package \code{dfphase1}}. To appear on
-  \emph{Frontiers in Statistical Quality Control 12}, eds. S. Knoth and
-  W. Schmid, Springer.
+  \emph{Journal of Quality Technology}, \bold{45}, pp. 273--284, 
+  \doi{10.1080/00224065.2013.11917938}.
 
-  G. Capizzi and G. Masarotto (2016), Phase I Distribution-Free
+  G. Capizzi and G. Masarotto (2017), Phase I Distribution-Free
   Analysis of Multivariate Data, \emph{Technometrics},
-  to appear, \url{http://dx.doi.org/10.1080/00401706.2016.1272494}.
+  \bold{59}, pp. 484--495, 
+  \doi{10.1080/00401706.2016.1272494}.
   
+  G. Capizzi and G. Masarotto (2018),
+  \dQuote{Phase I Distribution-Free Analysis with the R
+    Package \code{dfphase1}}.
+  \emph{Frontiers in Statistical Quality Control 12}, eds. S. Knoth and
+  W. Schmid, pp. 3--19, Springer, 
+  \doi{10.1007/978-3-319-75295-2}  
 }
 \seealso{
   \code{\link{shewhart}},
@@ -96,6 +108,7 @@
   \code{\link{mchangepoint}},
   \code{\link{mchangepoint.normal.limits}},
   \code{\link{rsp}},
+  \code{\link{mphase1}},
   \code{\link{phase1Plot}},
   \code{\link{mphase1Plot}}.
 }

@@ -16,7 +16,7 @@ mshewhart <- function(x, subset, stat=c("T2Var","T2","Var","Depth Ranks"),
         stop("Number of subgroups/times must be greater than 1 (after subsetting)")
     stat <- match.arg(stat)
     score <- match.arg(score)
-    if (is.na(limits)) {
+    if ((length(limits)==1) && is.na(limits)) {
         if (L<100) stop("The number of permutation is too low")
         if (!is.na(seed)) {
             if (exists(".Random.seed", envir = .GlobalEnv, inherits = FALSE)) {
@@ -65,7 +65,7 @@ mshewhart <- function(x, subset, stat=c("T2Var","T2","Var","Depth Ranks"),
         v$center <- rep(N/2,d[1])
         v$scatter <- sc
     }
-    if (is.na(limits)) {
+    if ((length(limits)==1) && is.na(limits)) {
         if (stat=="T2Var") {
             v$limits <- dbalance2(v$sp,FAP)
         } else {

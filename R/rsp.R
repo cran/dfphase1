@@ -40,9 +40,10 @@ rsp <- function(y, plot=TRUE, L=1000, seed=11642257, alpha=0.05,
     nsteps <- opt$maxsteps
     ipar <- c(opt$m,opt$n,nsteps,opt$lmin,if (type=="level") 1 else 2,opt$L)
     nstat <- if (opt$n==1) nsteps else nsteps+1
-    mod <- .C("ggdotrsp",as.integer(ipar),as.double(y),
-              steps=integer(1+2*(nsteps+1)),stat=double(nstat),
-              perm=double(nstat*opt$L),PACKAGE="dfphase1")
+    #mod <- .C("ggdotrsp",as.integer(ipar),as.double(y),
+              #steps=integer(1+2*(nsteps+1)),stat=double(nstat),
+              #perm=double(nstat*opt$L),PACKAGE="dfphase1")
+    mod <- ggdotrsp(ipar, y)
     perm <- matrix(mod$perm,nstat)
     a <- apply(perm,1,mean)
     b <- pmax(apply(perm,1,sd),.Machine$double.eps)
@@ -56,9 +57,10 @@ rsp <- function(y, plot=TRUE, L=1000, seed=11642257, alpha=0.05,
         j <- which.max(r[,1])
         nstat <- NROW(r)
         if ((NCOL(y)==1) || (j<nstat)) {
-            g <- factor(.C("ggstepfactor",as.integer(j+1),
-                           as.integer(mod$steps),integer(NROW(y)),
-                           PACKAGE="dfphase1")[[3]])
+            #g <- factor(.C("ggstepfactor",as.integer(j+1),
+                           #as.integer(mod$steps),integer(NROW(y)),
+                           #PACKAGE="dfphase1")[[3]])
+            g <- factor(ggstepfactor(opt$m, j+1, mod$steps))
             fit <- tapply(yi,g,mean)[g]
         } else {
             q <- quantile(w,1-opt$alpha)

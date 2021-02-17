@@ -168,19 +168,24 @@ mshewhart.normal.limits(p, n, m, stat = c("T2Var", "T2", "Var", "Depth Ranks"),
 }
 
 \references{
-  R. C. Bell, L. A. Jones-Farmer, N. Billor (2014) \dQuote{A distribution-free multivariate Phase I location control
-chart for subgrouped data from elliptical
-  distributions}. \emph{Technometrics}, \bold{56}, pp. 528--538.
+  R. C. Bell, L. A. Jones-Farmer, N. Billor (2014) 
+  \dQuote{A distribution-free multivariate Phase I location control
+    chart for subgrouped data from elliptical distributions}. 
+  \emph{Technometrics}, \bold{56}, pp. 528--538,
+  \doi{10.1080/00401706.2013.879264}.
 
   
   C. R. Cheng, J. J. H. Shiau JJH (2015)
   \dQuote{A distribution-free multivariate control chart for Phase I applications}.
     \emph{Quality and Reliability Engineering International}, \bold{31},
-    pp. 97--111.
+    pp. 97--111, 
+    \doi{10.1002/qre.1751}.
 
   M. Hallin and D. Paindaveine (2005) \dQuote{Affine-Invariant Aligned
   Rank Tests for the Multivariate General Linear Model with VARMA
-  Errors}. \emph{Journal of Multivariate Analysis}, \bold{93}, pp. 122--163.
+  Errors}. \emph{Journal of Multivariate Analysis}, \bold{93}, 
+  pp. 122--163, \doi{10.1016/j.jmva.2004.01.005}.
+
   
   D. C. Montgomery (2009) \emph{Introduction to Statistical Quality
     Control}, 6th edn. Wiley.

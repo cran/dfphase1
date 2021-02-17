@@ -13,8 +13,10 @@
   A 2x56 matrix.
 }
 \references{
-  D. S. Holmes, A. Mergen (1993) \dQuote{Improving the Performance of the \eqn{T^2}{T2} Control
-    Chart}, \emph{Quality Engineering}, \bold{5}, pp. 619--625.
+  D. S. Holmes, A. Mergen (1993) 
+  \dQuote{Improving the Performance of the \eqn{T^2}{T2} Control Chart}, 
+  \emph{Quality Engineering}, \bold{5}, pp. 619--625,
+  \doi{10.1080/08982119308919004}.
 }
 \examples{
 data(gravel)

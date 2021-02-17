@@ -36,7 +36,7 @@ mchangepoint <- function(x, subset, score=c("Identity","Signed Ranks","Spatial S
     } else if (score=="Marginal Ranks") {
         for (i in 1:d[1]) x[i,,] <- rank(x[i,,])
     }
-    if (is.na(limits)) {
+    if ((length(limits)==1) && is.na(limits)) {
         if (L<1000) stop("The number of permutation is too low")
         if (!is.na(seed)) {
             if (exists(".Random.seed", envir = .GlobalEnv, inherits = FALSE)) {
@@ -51,7 +51,7 @@ mchangepoint <- function(x, subset, score=c("Identity","Signed Ranks","Spatial S
         seed <- NA
     }
     a <- ggglrchart(x,only.mean,L)
-    if (is.na(limits)) {
+    if ((length(limits)==1) && is.na(limits)) {
         u <- rowMeans(a$glr.perm)
         a$limits <- u*quantile(apply(a$glr.perm/u,2,max,na.rm=TRUE),1-FAP)
         a$glr.perm <- NULL

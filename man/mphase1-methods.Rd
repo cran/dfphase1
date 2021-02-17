@@ -51,9 +51,9 @@
   for the description.
 }
 \references{
-  G. Capizzi and G. Masarotto (2016), Phase I Distribution-Free
+  G. Capizzi and G. Masarotto (2017), Phase I Distribution-Free
   Analysis of Multivariate Data, \emph{Technometrics},
-  to appear, \url{http://dx.doi.org/10.1080/00401706.2016.1272494}.
+  \bold{59}, pp. 484--495, \doi{10.1080/00401706.2016.1272494}.
 }
 \author{
 \packageAuthor{dfphase1}.
