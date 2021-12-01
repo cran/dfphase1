@@ -96,7 +96,7 @@ guaranteed  without making any parametric assumptions on the stable
     Package \code{dfphase1}}.
   \emph{Frontiers in Statistical Quality Control 12}, eds. S. Knoth and
   W. Schmid, pp. 3--19, Springer, 
-  \doi{10.1007/978-3-319-75295-2}  
+  \doi{10.1007/978-3-319-75295-2_1}  
 }
 \seealso{
   \code{\link{shewhart}},

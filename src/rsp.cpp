@@ -1,3 +1,5 @@
+#define STRICT_R_HEADERS 
+#include <float.h>
 #include <Rcpp.h>
 using namespace Rcpp;
 
@@ -117,7 +119,7 @@ void ggfitstep1(int *ipar, double *y, int *steps, double *stat, int *iwork,
             }
             if (gi[i] > gi[iopt]) iopt = i;
         }
-        if (gi[iopt] < DOUBLE_EPS) {
+        if (gi[iopt] < DBL_EPSILON) {
             for (i = NINT - 1; i < nsteps; i++) stat[i] = stat[i - 1];
             return;
         }

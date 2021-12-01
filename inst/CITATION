@@ -1,0 +1,24 @@
+bibentry(bibtype = "InCollection",
+  title        = "Phase I Distribution-Free Analysis with the {R} Package {dfphase1}",
+  author       = c(person(given = "Giovanna",
+                          family = "Capizzi",
+                          email = "giovanna.capizzi@unipd.it"),
+                   person(given = "Guido",
+                          family = "Masarotto",
+                          email = "guido.masarotto@unipd.it"))
+                   ,
+  booktitle    = "Frontiers in Statistical Quality Control 12", 
+  year         = "2018",
+  editor       =  "Knoth, Sven and Schmid, Wolfgang",
+  publisher    = "Springer",
+  pages        = "3--19",
+  doi          = "10.1007/978-3-319-75295-2_1",
+  header       = "To cite dfphase1 in publications use:",
+  textVersion  =
+  paste("Giovanna Capizzi, Guido Masarotto (2018).",
+        "Phase I Distribution-Free Analysis with the R Package dfphase1.",
+        "in Frontiers in Statistical Quality Control 12, ",
+        "eds: Sven Knoth and Wolfgang Schmid.",
+        "doi:10.1007/978-3-319-75295-2_1")
+)
+

@@ -1,3 +1,10 @@
+## dfphase1 1.1.4 (September 2021)
+
+- Minor changes to the Rcpp sources to cope with Rcpp's STRICT_R_HEADERS and
+  USE_FC_LEN_T/FCONE declarations
+
+- Added CITATION  
+
 ## dfphase1 1.1.3 (February 2020)
 
 - Minor changes to the manual pages (references show the DOI and use the

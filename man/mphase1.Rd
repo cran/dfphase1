@@ -5,7 +5,7 @@ Distribution-free Phase I analysis of multivariate data
 }
 \description{
   Retrospective change point detection using the method  described by
-  Capizzi and Masarotto (2016).
+  Capizzi and Masarotto (2017).
 }
 \usage{
 mphase1(x, plot = TRUE, post.signal = TRUE, isolated = dim(x)[2] > 1, step = TRUE,

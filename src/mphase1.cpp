@@ -1,3 +1,5 @@
+#define STRICT_R_HEADERS 
+#define USE_FC_LEN_T
 #include <Rcpp.h>
 #include <R_ext/BLAS.h>
 using namespace Rcpp;

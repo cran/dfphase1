@@ -1,6 +1,11 @@
+#define STRICT_R_HEADERS 
+#define USE_FC_LEN_T
 #include <Rcpp.h>
 #include <R_ext/BLAS.h>
 #include <R_ext/Lapack.h>
+#ifndef FCONE
+# define FCONE
+#endif
 using namespace Rcpp;
 
 #define GGEPS (sqrt(std::numeric_limits<double>::epsilon()))
@@ -16,7 +21,7 @@ namespace {
     inline void ggtrmult(int p, int n, bool tran, double *a, double *b) {
 	char SIDE='L', UPLO='U', TRANSA= tran ? 'T' : 'N', DIAG='N';
 	double one=1.0;
-	F77_CALL(dtrmm)(&SIDE, &UPLO, &TRANSA, &DIAG, &p, &n, &one, a, &p, b, &p);  
+	F77_CALL(dtrmm)(&SIDE, &UPLO, &TRANSA, &DIAG, &p, &n, &one, a, &p, b, &p FCONE FCONE FCONE FCONE);   
     }
 
 
@@ -224,7 +229,7 @@ namespace {
 	return wsum/n;
     }
 
-    // length(w)=p
+    // length(w)=pF
     void ggspatialranks(int p, int n, double *x, double *s, double *w) {
 	int i, j, ione=1, pn=p*n;
 	double d, *xi, *xj, *si, *sj, eps=GGEPS, one=1.0, mone=-1.0;
@@ -439,9 +444,10 @@ namespace {
 	    int INFO, LWORK=3*p;
 	    double *A=w, *W=A+p2, *WORK=W+p;
 	    char JOBZ='N', UPLO='U';
+            size_t sone=1;
 	    std::copy(r,r+p2,A);
 	    ggtrmult(p,p,true,r,A);
-	    F77_CALL(dsyev)(&JOBZ,&UPLO,&p,A,&p,W,WORK,&LWORK,&INFO);
+	    F77_CALL(dsyev)(&JOBZ,&UPLO,&p,A,&p,W,WORK,&LWORK,&INFO FCONE FCONE);
 	    for (i=0, rank=0, ld=0.0; i<p; i++) {
 		if (W[i]>eps) {
 		    rank++;

@@ -1,6 +1,11 @@
+#define STRICT_R_HEADERS 
+#define USE_FC_LEN_T
 #include <Rcpp.h>
 #include <R_ext/BLAS.h>
 using namespace Rcpp;
+#ifndef FCONE
+# define FCONE
+#endif
 
 #define ILENGTH(p) (7+(p))
 #define DLENGTH(p) (5*(p)+(p)*(p))
@@ -103,7 +108,7 @@ namespace {
 	int ione=1;
 	double *cov=dlars+p, one=1.0 ,zero=0.0;
 	/* cov=X'y */
-	F77_CALL(dgemv)(&tran,&n,&p,&one,x,&n,y,&ione,&zero,cov,&ione);	
+	F77_CALL(dgemv)(&tran,&n,&p,&one,x,&n,y,&ione,&zero,cov,&ione FCONE);	
     }
 
     void ggsetr(int n, int p, double *x, double *dlars) {
@@ -262,10 +267,10 @@ namespace {
 	    z=0.0, o=1.0, *r12=r+act*p, *a2=a+act ;
 	F77_CALL(dcopy)(&act,cov,&ione,u,&ione);
 	F77_CALL(dcopy)(&act,cov,&ione,a,&ione);
-	F77_CALL(dtrsv)(&up, &tran, &no, &act, r, &p, u, &ione) ;
+	F77_CALL(dtrsv)(&up, &tran, &no, &act, r, &p, u, &ione FCONE FCONE FCONE) ;
 	if (nact) 
-	    F77_CALL(dgemv)(&tran, &act, &nact, &o, r12, &p, u, &ione, &z, a2, &ione); 
-	F77_CALL(dtrsv)(&up, &no, &no, &act, r, &p, u, &ione) ;
+	    F77_CALL(dgemv)(&tran, &act, &nact, &o, r12, &p, u, &ione, &z, a2, &ione FCONE); 
+	F77_CALL(dtrsv)(&up, &no, &no, &act, r, &p, u, &ione FCONE FCONE FCONE) ;
     }
 
 
