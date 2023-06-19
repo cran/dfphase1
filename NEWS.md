@@ -1,3 +1,22 @@
+## dfphase1 1.2.0 (June 2023)
+
+- shewhart: when argument limits=NA (i.e., when the control limits are
+  not precomputed), the control limits are computed using a permutation
+  approach also for the rank based statistics; hence, they guarantee the
+  desired FAP also when the in-control distribution is not absolutely
+  continuous.
+
+- shewhart: added control charts based on the Lepage and Cucconi control
+  statistics.
+
+- shewhart: default for argument aggregation is now 'mean' (and not
+  'median' as before). This was introduced for 'textbook obedience'. 
+
+- mshewhart: added the possibility to take into account the subgroup
+  structure of the data when computing the scatter matrix used to
+  (inner) standardise the spatial signs and ranks and the multivariate
+  signed ranks.
+
 ## dfphase1 1.1.4 (September 2021)
 
 - Minor changes to the Rcpp sources to cope with Rcpp's STRICT_R_HEADERS and

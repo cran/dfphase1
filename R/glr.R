@@ -32,7 +32,7 @@ mchangepoint <- function(x, subset, score=c("Identity","Signed Ranks","Spatial S
         stop("Number of subgroups/times must be greater than 5")
     score <- match.arg(score)
     if (score %in% c("Signed Ranks","Spatial Signs","Spatial Ranks")) {
-        x <- ggrscore(x,score)$score
+        x <- ggrscore(x,score, FALSE)$score
     } else if (score=="Marginal Ranks") {
         for (i in 1:d[1]) x[i,,] <- rank(x[i,,])
     }

@@ -69,6 +69,7 @@ List MPHASE1(NumericVector xx, bool isolated, bool step, int ncp, int lmin, int 
     int *steps=stepssteps.begin(), *iw=iwork.begin();
     std::copy(x,x+pnm,xperm);
     for (i=1, psi=pstat; i<=nperm; i++, psi+=ncp) {
+        checkUserInterrupt();
 	ggmperm(p,nm,xperm);
 	ggforward(p,n,m,xperm,isolated,step,lmin,ncp,l,r,sc,steps,psi,iw,w);
 	for (j=0; j<ncp; j++) {

@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // alasso
 LogicalVector alasso(NumericMatrix x, NumericVector y, double gamma, double P);
 RcppExport SEXP _dfphase1_alasso(SEXP xSEXP, SEXP ySEXP, SEXP gammaSEXP, SEXP PSEXP) {
@@ -36,15 +41,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // ggrscore
-List ggrscore(NumericVector x, std::string score, int iter);
-RcppExport SEXP _dfphase1_ggrscore(SEXP xSEXP, SEXP scoreSEXP, SEXP iterSEXP) {
+List ggrscore(NumericVector x, std::string score, bool within, int iter);
+RcppExport SEXP _dfphase1_ggrscore(SEXP xSEXP, SEXP scoreSEXP, SEXP withinSEXP, SEXP iterSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< std::string >::type score(scoreSEXP);
+    Rcpp::traits::input_parameter< bool >::type within(withinSEXP);
     Rcpp::traits::input_parameter< int >::type iter(iterSEXP);
-    rcpp_result_gen = Rcpp::wrap(ggrscore(x, score, iter));
+    rcpp_result_gen = Rcpp::wrap(ggrscore(x, score, within, iter));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -61,15 +67,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // ggclassicmshewhart
-List ggclassicmshewhart(NumericVector x, std::string stat, int L);
-RcppExport SEXP _dfphase1_ggclassicmshewhart(SEXP xSEXP, SEXP statSEXP, SEXP LSEXP) {
+List ggclassicmshewhart(NumericVector x, std::string stat, std::string score, int L);
+RcppExport SEXP _dfphase1_ggclassicmshewhart(SEXP xSEXP, SEXP statSEXP, SEXP scoreSEXP, SEXP LSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< std::string >::type stat(statSEXP);
+    Rcpp::traits::input_parameter< std::string >::type score(scoreSEXP);
     Rcpp::traits::input_parameter< int >::type L(LSEXP);
-    rcpp_result_gen = Rcpp::wrap(ggclassicmshewhart(x, stat, L));
+    rcpp_result_gen = Rcpp::wrap(ggclassicmshewhart(x, stat, score, L));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -100,14 +107,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // ggdotrsp
-List ggdotrsp(IntegerVector ripar, NumericVector ry);
-RcppExport SEXP _dfphase1_ggdotrsp(SEXP riparSEXP, SEXP rySEXP) {
+List ggdotrsp(IntegerVector ripar, NumericVector rry);
+RcppExport SEXP _dfphase1_ggdotrsp(SEXP riparSEXP, SEXP rrySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< IntegerVector >::type ripar(riparSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type ry(rySEXP);
-    rcpp_result_gen = Rcpp::wrap(ggdotrsp(ripar, ry));
+    Rcpp::traits::input_parameter< NumericVector >::type rry(rrySEXP);
+    rcpp_result_gen = Rcpp::wrap(ggdotrsp(ripar, rry));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -152,13 +159,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // ggrank
-List ggrank(NumericMatrix x);
-RcppExport SEXP _dfphase1_ggrank(SEXP xSEXP) {
+List ggrank(NumericMatrix x, int L);
+RcppExport SEXP _dfphase1_ggrank(SEXP xSEXP, SEXP LSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(ggrank(x));
+    Rcpp::traits::input_parameter< int >::type L(LSEXP);
+    rcpp_result_gen = Rcpp::wrap(ggrank(x, L));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -175,21 +183,50 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// gglepagecucconi
+List gglepagecucconi(NumericMatrix x, int L, bool lepage);
+RcppExport SEXP _dfphase1_gglepagecucconi(SEXP xSEXP, SEXP LSEXP, SEXP lepageSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type L(LSEXP);
+    Rcpp::traits::input_parameter< bool >::type lepage(lepageSEXP);
+    rcpp_result_gen = Rcpp::wrap(gglepagecucconi(x, L, lepage));
+    return rcpp_result_gen;
+END_RCPP
+}
+// gglepagecucconiall
+NumericVector gglepagecucconiall(int n, int m, int rep, bool lepage);
+RcppExport SEXP _dfphase1_gglepagecucconiall(SEXP nSEXP, SEXP mSEXP, SEXP repSEXP, SEXP lepageSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< int >::type m(mSEXP);
+    Rcpp::traits::input_parameter< int >::type rep(repSEXP);
+    Rcpp::traits::input_parameter< bool >::type lepage(lepageSEXP);
+    rcpp_result_gen = Rcpp::wrap(gglepagecucconiall(n, m, rep, lepage));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_dfphase1_alasso", (DL_FUNC) &_dfphase1_alasso, 4},
     {"_dfphase1_MPHASE1", (DL_FUNC) &_dfphase1_MPHASE1, 6},
-    {"_dfphase1_ggrscore", (DL_FUNC) &_dfphase1_ggrscore, 3},
+    {"_dfphase1_ggrscore", (DL_FUNC) &_dfphase1_ggrscore, 4},
     {"_dfphase1_ggdepthranks", (DL_FUNC) &_dfphase1_ggdepthranks, 2},
-    {"_dfphase1_ggclassicmshewhart", (DL_FUNC) &_dfphase1_ggclassicmshewhart, 3},
+    {"_dfphase1_ggclassicmshewhart", (DL_FUNC) &_dfphase1_ggclassicmshewhart, 4},
     {"_dfphase1_ggscore2mshewhart", (DL_FUNC) &_dfphase1_ggscore2mshewhart, 3},
     {"_dfphase1_ggglrchart", (DL_FUNC) &_dfphase1_ggglrchart, 3},
     {"_dfphase1_ggdotrsp", (DL_FUNC) &_dfphase1_ggdotrsp, 2},
     {"_dfphase1_ggstepfactor", (DL_FUNC) &_dfphase1_ggstepfactor, 3},
     {"_dfphase1_ggxbars", (DL_FUNC) &_dfphase1_ggxbars, 3},
     {"_dfphase1_ggxbarsall", (DL_FUNC) &_dfphase1_ggxbarsall, 4},
-    {"_dfphase1_ggrank", (DL_FUNC) &_dfphase1_ggrank, 1},
+    {"_dfphase1_ggrank", (DL_FUNC) &_dfphase1_ggrank, 2},
     {"_dfphase1_ggrankall", (DL_FUNC) &_dfphase1_ggrankall, 3},
+    {"_dfphase1_gglepagecucconi", (DL_FUNC) &_dfphase1_gglepagecucconi, 3},
+    {"_dfphase1_gglepagecucconiall", (DL_FUNC) &_dfphase1_gglepagecucconiall, 4},
     {NULL, NULL, 0}
 };
 

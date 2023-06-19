@@ -17,12 +17,12 @@
 \usage{
 mshewhart(x, subset, stat = c("T2Var", "T2", "Var", "Depth Ranks"), score = c("Identity",
   "Signed Ranks",  "Spatial Signs", "Spatial Ranks", "Marginal Ranks"),
-  loc.scatter = c("Classic", "MCD"), plot = TRUE, FAP = 0.05,
+  loc.scatter = c("Classic", "Robust"), plot = TRUE, FAP = 0.05,
   seed = 11642257, L = 1000, limits = NA)
 
 mshewhart.normal.limits(p, n, m, stat = c("T2Var", "T2", "Var", "Depth Ranks"),
   score = c("Identity", "Signed Ranks",  "Spatial Signs", "Spatial Ranks",
-  "Marginal Ranks"), loc.scatter = c("Classic", "MCD"),
+  "Marginal Ranks"), loc.scatter = c("Classic", "Robust"),
   FAP = 0.05, seed = 11642257, L = 100000) 
 }
 \arguments{
@@ -53,8 +53,8 @@ mshewhart.normal.limits(p, n, m, stat = c("T2Var", "T2", "Var", "Depth Ranks"),
   \item{loc.scatter}{
     character: estimates of the multivariate location and scatter
     to use when no preliminary rank transformation is applied.
-    Unused when \code{stat} is equal to \code{Depth Ranks} or \code{score} is different
-    from \code{Identity}. See Details.
+    Unused when \code{stat} is equal to \code{Depth Ranks} or \code{score} is 
+    \code{Marginal Ranks}. See Details.
   }
   \item{plot}{
     logical; if \code{TRUE}, control statistic[s] is[are] displayed. 
@@ -111,7 +111,7 @@ mshewhart.normal.limits(p, n, m, stat = c("T2Var", "T2", "Var", "Depth Ranks"),
       and dispersion matrix (Montgomery, 2009, equations 11.14--11.18;
       Qiu, 2013, equations at page 269)   or the highly robust minimum covariance determinant (MCD)
       estimate when argument \code{loc.scatter} is equal to
-      \code{Classic} or \code{MCD}, respectively.
+      \code{Classic} or \code{Robust}, respectively.
     \item{\code{score=Signed Ranks, Spatial Signs, Spatial Ranks,
   Marginal Ranks}:} from a \dQuote{rank} transformation of the original 
   data. In particular, see   Hallin and Paindaveine (2005) for the
@@ -121,10 +121,17 @@ mshewhart.normal.limits(p, n, m, stat = c("T2Var", "T2", "Var", "Depth Ranks"),
   ranks are \dQuote{inner} standardized while marginal ranks are
   \dQuote{outer} standardized (see Oja (2010) for the definition of
   \dQuote{inner} and \dQuote{outer} standardization).
-
+  When \code{loc.scatter} is equal to \code{Classic}, 
+  inner standardization takes into account the subgroup structure of the
+  data imposing that the average of the \strong{within-group} covariances of the
+  transformed data is proportional to the identity matrix.
+  Otherwise, i.e., when
+  \code{loc.scatter} is equal to \code{Robust},  it is based on  
+  a standard Hettmansperger-Randles-like scatter estimate.
   Note that the \eqn{T^2}{T2} control statistics based on the spatial
   signs corresponds to the control charts suggested by
-  Cheng and Shiau (2015).
+  Cheng and Shiau (2015) when \code{loc.scatter} is equal to
+  \code{Robust}.
   }
 }
 \value{

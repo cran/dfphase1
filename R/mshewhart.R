@@ -1,7 +1,7 @@
 mshewhart <- function(x, subset, stat=c("T2Var","T2","Var","Depth Ranks"),
                       score=c("Identity","Signed Ranks","Spatial Signs",
                               "Spatial Ranks","Marginal Ranks"),
-                      loc.scatter = c("Classic","MCD"),
+                      loc.scatter = c("Classic","Robust"),
                       plot=TRUE, FAP=0.05, seed=11642257, L=1000, limits=NA) {
     d <- dim(x)
     if (length(d)!=3) stop("x must be a pxnxm array")
@@ -34,25 +34,27 @@ mshewhart <- function(x, subset, stat=c("T2Var","T2","Var","Depth Ranks"),
     if (stat=="Depth Ranks") {
         v <- ggdepthranks(x,L)
         score <- "Depth Ranks"
-    } else if (score=="Identity") {
+    } else if (score != "Marginal Ranks") {
         loc.scatter <- match.arg(loc.scatter)
-        if (loc.scatter=="MCD") {
-            dim(x) <- c(d[1],d[2]*d[3])
-            u <- robustbase::covMcd(t(x))
-            sc <- chol(u$cov)
-            x <- solve(t(sc),x-u$center)
-            dim(x) <- d
-            v <- ggscore2mshewhart(x,stat,L)
-            v$center <- u$center
-            v$scatter <- sc
+        if (loc.scatter=="Robust") {
+            if (score == "Identity") {
+                dim(x) <- c(d[1],d[2]*d[3])
+                u <- robustbase::covMcd(t(x))
+                sc <- chol(u$cov)
+                x <- solve(t(sc),x-u$center)
+                dim(x) <- d
+                v <- ggscore2mshewhart(x,stat,L)
+                v$center <- u$center
+                v$scatter <- sc
+            } else {
+                u <- ggrscore(x,score, FALSE)
+                v <- ggscore2mshewhart(u$score,stat,L)
+                v$center <- u$center
+                v$scatter <- u$scatter
+            }
         } else {
-            v <- ggclassicmshewhart(x,stat,L)
+            v <- ggclassicmshewhart(x,stat,score,L)
         }
-    } else  if (score %in% c("Signed Ranks","Spatial Signs","Spatial Ranks")) {
-        u <- ggrscore(x,score)
-        v <- ggscore2mshewhart(u$score,stat,L)
-        v$center <- u$center
-        v$scatter <- u$scatter
     } else if (score=="Marginal Ranks") {
         N <- d[2]*d[3]
         dim(x) <- c(d[1],N)
@@ -112,7 +114,7 @@ mshewhart <- function(x, subset, stat=c("T2Var","T2","Var","Depth Ranks"),
 mshewhart.normal.limits <- function(p, n, m, stat=c("T2Var","T2","Var", "Depth Ranks"),
                                     score=c("Identity","Signed Ranks","Spatial Signs",
                                             "Spatial Ranks","Marginal Ranks"),
-                                    loc.scatter = c("Classic","MCD"),
+                                    loc.scatter = c("Classic","Robust"),
                                     FAP=0.05, seed=11642257, L=100000) {
     stat <- match.arg(stat)
     score <- match.arg(score)

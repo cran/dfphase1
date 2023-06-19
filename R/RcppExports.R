@@ -9,16 +9,16 @@ MPHASE1 <- function(xx, isolated, step, ncp, lmin, nperm) {
     .Call('_dfphase1_MPHASE1', PACKAGE = 'dfphase1', xx, isolated, step, ncp, lmin, nperm)
 }
 
-ggrscore <- function(x, score, iter = 30L) {
-    .Call('_dfphase1_ggrscore', PACKAGE = 'dfphase1', x, score, iter)
+ggrscore <- function(x, score, within, iter = 30L) {
+    .Call('_dfphase1_ggrscore', PACKAGE = 'dfphase1', x, score, within, iter)
 }
 
 ggdepthranks <- function(x, L = 1000L) {
     .Call('_dfphase1_ggdepthranks', PACKAGE = 'dfphase1', x, L)
 }
 
-ggclassicmshewhart <- function(x, stat, L = 1000L) {
-    .Call('_dfphase1_ggclassicmshewhart', PACKAGE = 'dfphase1', x, stat, L)
+ggclassicmshewhart <- function(x, stat, score, L = 1000L) {
+    .Call('_dfphase1_ggclassicmshewhart', PACKAGE = 'dfphase1', x, stat, score, L)
 }
 
 ggscore2mshewhart <- function(x, stat, L = 1000L) {
@@ -29,8 +29,8 @@ ggglrchart <- function(x, onlymean = FALSE, L = 1000L) {
     .Call('_dfphase1_ggglrchart', PACKAGE = 'dfphase1', x, onlymean, L)
 }
 
-ggdotrsp <- function(ripar, ry) {
-    .Call('_dfphase1_ggdotrsp', PACKAGE = 'dfphase1', ripar, ry)
+ggdotrsp <- function(ripar, rry) {
+    .Call('_dfphase1_ggdotrsp', PACKAGE = 'dfphase1', ripar, rry)
 }
 
 ggstepfactor <- function(m, level, rsteps) {
@@ -45,11 +45,19 @@ ggxbarsall <- function(n, m, aggr_with_mean, rep) {
     .Call('_dfphase1_ggxbarsall', PACKAGE = 'dfphase1', n, m, aggr_with_mean, rep)
 }
 
-ggrank <- function(x) {
-    .Call('_dfphase1_ggrank', PACKAGE = 'dfphase1', x)
+ggrank <- function(x, L) {
+    .Call('_dfphase1_ggrank', PACKAGE = 'dfphase1', x, L)
 }
 
 ggrankall <- function(n, m, rep) {
     .Call('_dfphase1_ggrankall', PACKAGE = 'dfphase1', n, m, rep)
+}
+
+gglepagecucconi <- function(x, L, lepage) {
+    .Call('_dfphase1_gglepagecucconi', PACKAGE = 'dfphase1', x, L, lepage)
+}
+
+gglepagecucconiall <- function(n, m, rep, lepage) {
+    .Call('_dfphase1_gglepagecucconiall', PACKAGE = 'dfphase1', n, m, rep, lepage)
 }
 

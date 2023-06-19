@@ -153,6 +153,7 @@ List ggdotrsp(IntegerVector ripar, NumericVector rry) {
     double *y=ry.begin(), *stat=rstat.begin(), *perm=rperm.begin(), *work = rwork.begin(); 
     ggfitstep1(ipar, y, steps, stat, iwork, work);
     for (i = 0; i < nperm; i++, perm += nstat) {
+        checkUserInterrupt();
         ggperm(nm, y);
         ggfitstep1(ipar, y, psteps, perm, iwork, work);
     }
